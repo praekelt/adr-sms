@@ -23,51 +23,17 @@ describe("app", function() {
         });
 
         describe("when the user starts a session", function() {
-            it("should ask them want they want to do", function() {
+            it("should acknowlede", function() {
                 return tester
                     .start()
+                    .input('11111')
                     .check.interaction({
                         state: 'states:start',
-                        reply: [
-                            'Hi there! What do you want to do?',
-                            '1. Show this menu again',
-                            '2. Exit'
-                        ].join('\n')
+                        reply: 'Message received'
                     })
                     .run();
             });
         });
 
-        describe("when the user asks to see the menu again", function() {
-            it("should show the menu again", function() {
-                return tester
-                    .setup.user.state('states:start')
-                    .input('1')
-                    .check.interaction({
-                        state: 'states:start',
-                        reply: [
-                            'Hi there! What do you want to do?',
-                            '1. Show this menu again',
-                            '2. Exit'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-        });
-
-        describe("when the user asks to exit", function() {
-            it("should say thank you and end the session", function() {
-                return tester
-                    .setup.user.state('states:start')
-                    .input('2')
-                    .check.interaction({
-                        state: 'states:start',
-                        reply: [
-                            'Thanks, cheers!'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-        });
     });
 });
