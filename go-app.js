@@ -27,13 +27,15 @@ go.app = function() {
                 next: 'states:start',
                 events: {
                     'state:enter': function() {
-                        // Extract the key info
+                        // Extract and save the key info
                         self.contact.extra.pin = self.im.msg.content; // zipcode of user
                         self.contact.extra.circle = self.im.msg.transport_metadata.netcore.circle;
-                        // number they dialed to initiate 
-                        self.contact.extra.source_addr = self.im.msg.to_addr; 
-                        // sms or ivr
-                        self.contact.extra.source_sys = self.im.msg.transport_metadata.netcore.source; 
+                        if (self.contact.extra.registration_source === undefined){
+                            // New contact via sms or ivr
+                            self.contact.extra.registration_source = self.im.msg.transport_metadata.netcore.source;
+                            // number they dialed to initiate 
+                            self.contact.extra.source_addr = self.im.msg.to_addr; 
+                        }
                         msisdn = self.im.msg.from_addr;
                         return self.im.contacts.save(self.contact);
                     }

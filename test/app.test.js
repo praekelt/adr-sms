@@ -25,7 +25,7 @@ describe("app", function() {
                 
         });
 
-        describe("when they have not registered",function() {
+        describe("when they have not been pre-registered",function() {
             it("should acknowledge and register them", function() {
                 return tester
                     .setup.user.addr('+27123')
@@ -47,7 +47,7 @@ describe("app", function() {
                     .check(function(api) {
                         var contact = api.contacts.store[0];
                         assert.equal(contact.extra.circle, 'of life');
-                        assert.equal(contact.extra.source_sys, 'sms');
+                        assert.equal(contact.extra.registration_source, 'sms');
                         assert.equal(contact.extra.source_addr, '10010');
                         assert.equal(contact.extra.pin, '11111');
                     })
