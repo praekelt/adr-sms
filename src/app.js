@@ -25,14 +25,14 @@ go.app = function() {
                 events: {
                     'state:enter': function() {
                         // Extract the key info
-                        pin = self.im.msg.content; // zipcode of user
-                        circle = self.im.msg.transport_metadata.netcore.circle;
+                        self.contact.extra.pin = self.im.msg.content; // zipcode of user
+                        self.contact.extra.circle = self.im.msg.transport_metadata.netcore.circle;
                         // number they dialed to initiate 
-                        source_addr = self.im.msg.to_addr; 
+                        self.contact.extra.source_addr = self.im.msg.to_addr; 
                         // sms or ivr
-                        source_sys = self.im.msg.transport_metadata.netcore.source; 
+                        self.contact.extra.source_sys = self.im.msg.transport_metadata.netcore.source; 
                         msisdn = self.im.msg.from_addr;
-
+                        return self.im.contacts.save(self.contact);
                     }
                 }
             });

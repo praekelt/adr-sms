@@ -1,6 +1,7 @@
 var vumigo = require('vumigo_v02');
 var fixtures = require('./fixtures');
 var AppTester = vumigo.AppTester;
+var assert = require('assert');
 
 
 describe("app", function() {
@@ -20,21 +21,14 @@ describe("app", function() {
                 })
                 .setup(function(api) {
                     fixtures().forEach(api.http.fixtures.add);
-                })
-                .setup(function(api) {
-                    api.contacts.add( {
-                        msisdn: '+271234',
-                        extra : {
-                            is_registered: 'true',
-                            registration_source: 'upload'
-                        }
-                    });
                 });
+                
         });
 
-        describe("when the user starts a session", function() {
-            it("should acknowlede", function() {
+        describe("when they have not registered",function() {
+            it("should acknowledge and register them", function() {
                 return tester
+                    .setup.user.addr('+27123')
                     .start()
                     .input({
                         content:'11111',
@@ -49,6 +43,13 @@ describe("app", function() {
                     .check.interaction({
                         state: 'states:start',
                         reply: 'Message received'
+                    })
+                    .check(function(api) {
+                        var contact = api.contacts.store[0];
+                        assert.equal(contact.extra.circle, 'of life');
+                        assert.equal(contact.extra.source_sys, 'sms');
+                        assert.equal(contact.extra.source_addr, '10010');
+                        assert.equal(contact.extra.pin, '11111');
                     })
                     .run();
             });
