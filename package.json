@@ -1,6 +1,6 @@
 {
-  "name": "go-jsbox-skeleton",
-  "version": "0.2.0",
+  "name": "adr-sms",
+  "version": "0.1.0",
   "description": "Skeleton for a vumi javascript sandbox app",
   "main": "lib/app.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/praekelt/go-jsbox-skeleton.git"
+    "url": "git://github.com/praekelt/adr-sms.git"
   },
   "keywords": [
     "vumi",
@@ -17,9 +17,9 @@
   "author": "Praekelt Foundation",
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/praekelt/go-jsbox-skeleton/issues"
+    "url": "https://github.com/praekelt/adr-sms/issues"
   },
-  "homepage": "https://github.com/praekelt/go-jsbox-skeleton",
+  "homepage": "https://github.com/praekelt/adr-sms",
   "dependencies": {
     "vumigo_v02": "~0.2",
     "q": "~0.9",
