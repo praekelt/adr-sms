@@ -5,11 +5,13 @@ go.app = function() {
     var vumigo = require('vumigo_v02');
     var App = vumigo.App;
     var EndState = vumigo.states.EndState;
+    var HttpApi = vumigo.http.api.HttpApi;
 
     var GoApp = App.extend(function(self) {
         App.call(self, 'states:start');
 
         self.init = function() {
+            self.http = new HttpApi(self.im);
             // Fetch the contact from the contact store that matches the current
             // user's address. When we get the contact, we put the contact on the
             // app so we can reference it easily when creating each state.
@@ -20,10 +22,24 @@ go.app = function() {
                 });
         };
 
+        self.get_adr_content = function(pin){
+            return self
+                .http.get('http://www.myneta.info/sms.php',{
+                    params: {
+                        message: 'MYNETA%20' + pin
+                    }
+                })
+                .then(function(resp) {
+                    // even errors return 200 and a string for the user
+                    // which is double quoted by sandbox
+                    trimmed = resp.body.substring(1, resp.body.length-1);
+                    return trimmed;
+                });
+        };
+
         self.states.add('states:start', function(name) {
-            
             return new EndState(name, {
-                text: 'Message received',
+                text: self.get_adr_content(self.im.msg.content),
                 next: 'states:start',
                 events: {
                     'state:enter': function() {

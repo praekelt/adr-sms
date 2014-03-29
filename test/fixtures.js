@@ -9,9 +9,9 @@ module.exports = function() {
         },
         "response": {
             "code": 200,
-            "data": "MYNETA:candidates details.You can visit our website " + 
-                    "www.myneta.info for full details of candidates or call " +
-                    "toll free 1800-110-440 to get them on phone"
+            "data": 'MYNETA:candidates details.You can visit our website ' + 
+                    'www.myneta.info for full details of candidates or call ' +
+                    'toll free 1800-110-440 to get them on phone'
         }
     },
     {
@@ -24,9 +24,9 @@ module.exports = function() {
         },
         "response": {
             "code": 200,
-            "data": "MYNETA: Please send a valid six digit pincode or " + 
-                    "constituency name.Visit www.myneta.info or call " + 
-                    "1800-110-440 to get more details of candidates"
+            "data": 'MYNETA: Please send a valid six digit pincode or ' + 
+                    'constituency name.Visit www.myneta.info or call ' + 
+                    '1800-110-440 to get more details of candidates'
         }
     },
     {
@@ -39,11 +39,11 @@ module.exports = function() {
         },
         "response": {
             "code": 200,
-            "data": "MYNETA: Despite our best efforts, pincode 149099 is " + 
-                    "still not mapped to its right constituency in our database " + 
-                    "yet. We are working on that, in the mean time you can send " + 
-                    "constituency name instead of pincode.Visit www.myneta.info " + 
-                    "or call 1800-110-440 to get more details of candidates" 
+            "data": 'MYNETA: Despite our best efforts, pincode 149099 is ' + 
+                    'still not mapped to its right constituency in our database ' + 
+                    'yet. We are working on that, in the mean time you can send ' + 
+                    'constituency name instead of pincode.Visit www.myneta.info ' + 
+                    'or call 1800-110-440 to get more details of candidates' 
                     
         }
     }];

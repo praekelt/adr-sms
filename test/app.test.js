@@ -31,7 +31,7 @@ describe("app", function() {
                     .setup.user.addr('+27123')
                     .start()
                     .input({
-                        content:'11111',
+                        content:'141002',
                         to_addr: '10010',
                         transport_metadata: {
                             'netcore': {
@@ -42,14 +42,17 @@ describe("app", function() {
                     })
                     .check.interaction({
                         state: 'states:start',
-                        reply: 'Message received'
+                        reply: ["MYNETA:candidates details.You can visit our website ", 
+                                "www.myneta.info for full details of candidates or call ",
+                                "toll free 1800-110-440 to get them on phone"]
+                                .join('')
                     })
                     .check(function(api) {
                         var contact = api.contacts.store[0];
                         assert.equal(contact.extra.circle, 'of life');
                         assert.equal(contact.extra.registration_source, 'sms');
                         assert.equal(contact.extra.source_addr, '10010');
-                        assert.equal(contact.extra.pin, '11111');
+                        assert.equal(contact.extra.pin, '141002');
                     })
                     .run();
             });
@@ -69,7 +72,7 @@ describe("app", function() {
                     .setup.user.addr('+27333')
                     .start()
                     .input({
-                        content:'11111',
+                        content:'141002',
                         to_addr: '10010',
                         transport_metadata: {
                             'netcore': {
@@ -80,14 +83,17 @@ describe("app", function() {
                     })
                     .check.interaction({
                         state: 'states:start',
-                        reply: 'Message received'
+                        reply: ["MYNETA:candidates details.You can visit our website ", 
+                                "www.myneta.info for full details of candidates or call ",
+                                "toll free 1800-110-440 to get them on phone"]
+                                .join('')
                     })
                     .check(function(api) {
                         var contact = api.contacts.store[0];
                         assert.equal(contact.extra.circle, 'of life');
                         assert.equal(contact.extra.registration_source, 'upload');
                         assert.equal(contact.extra.source_addr, undefined);
-                        assert.equal(contact.extra.pin, '11111');
+                        assert.equal(contact.extra.pin, '141002');
                     })
                     .run();
             });
