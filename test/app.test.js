@@ -54,6 +54,8 @@ describe("app", function() {
                             assert.equal(contact.extra.registration_source, 'sms');
                             assert.equal(contact.extra.source_addr, '10010');
                             assert.equal(contact.extra.pin, '141002');
+                            var metrics = api.metrics.stores.test_app;
+                            assert.deepEqual(metrics['requests.clean'].values, [1]);
                         })
                         .run();
                 });
@@ -86,6 +88,8 @@ describe("app", function() {
                             assert.equal(contact.extra.registration_source, 'sms');
                             assert.equal(contact.extra.source_addr, '10010');
                             assert.equal(contact.extra.pin, '14100');
+                            var metrics = api.metrics.stores.test_app;
+                            assert.deepEqual(metrics['requests.error'].values, [1]);
                         })
                         .run();
                 });
@@ -121,6 +125,8 @@ describe("app", function() {
                             assert.equal(contact.extra.registration_source, 'sms');
                             assert.equal(contact.extra.source_addr, '10010');
                             assert.equal(contact.extra.pin, '149099');
+                            var metrics = api.metrics.stores.test_app;
+                            assert.deepEqual(metrics['requests.unmapped'].values, [1]);
                         })
                         .run();
                 });
