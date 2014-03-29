@@ -55,5 +55,43 @@ describe("app", function() {
             });
         });
 
+        describe("when they have been pre-registered",function() {
+            it("should acknowledge and only update them", function() {
+                return tester
+                    .setup(function(api) {
+                        api.contacts.add( {
+                            msisdn: '+27333',
+                            extra : {
+                                registration_source: 'upload'
+                            }
+                        });
+                    })
+                    .setup.user.addr('+27333')
+                    .start()
+                    .input({
+                        content:'11111',
+                        to_addr: '10010',
+                        transport_metadata: {
+                            'netcore': {
+                                'circle': "of life",
+                                'source': "sms",
+                            }
+                        }
+                    })
+                    .check.interaction({
+                        state: 'states:start',
+                        reply: 'Message received'
+                    })
+                    .check(function(api) {
+                        var contact = api.contacts.store[0];
+                        assert.equal(contact.extra.circle, 'of life');
+                        assert.equal(contact.extra.registration_source, 'upload');
+                        assert.equal(contact.extra.source_addr, undefined);
+                        assert.equal(contact.extra.pin, '11111');
+                    })
+                    .run();
+            });
+        });
+
     });
 });
