@@ -15,10 +15,20 @@ describe("app", function() {
 
             tester
                 .setup.config.app({
-                    name: 'test_app'
+                    name: 'test_app',
+                    delivery_class: 'sms',
                 })
                 .setup(function(api) {
                     fixtures().forEach(api.http.fixtures.add);
+                })
+                .setup(function(api) {
+                    api.contacts.add( {
+                        msisdn: '+271234',
+                        extra : {
+                            is_registered: 'true',
+                            registration_source: 'upload'
+                        }
+                    });
                 });
         });
 
@@ -26,7 +36,16 @@ describe("app", function() {
             it("should acknowlede", function() {
                 return tester
                     .start()
-                    .input('11111')
+                    .input({
+                        content:'11111',
+                        to_addr: '10010',
+                        transport_metadata: {
+                            'netcore': {
+                                'circle': "of life",
+                                'source': "sms",
+                            }
+                        }
+                    })
                     .check.interaction({
                         state: 'states:start',
                         reply: 'Message received'
