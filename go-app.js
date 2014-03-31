@@ -84,7 +84,6 @@ go.app = function() {
                             // number they dialed to initiate 
                             self.contact.extra.source_addr = self.im.msg.to_addr; 
                         }
-                        msisdn = self.im.msg.from_addr;
                         return self.im.contacts.save(self.contact);
                     }
                 }
