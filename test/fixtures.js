@@ -4,7 +4,7 @@ module.exports = function() {
             "method": "GET",
             "url": "http://www.myneta.info/sms.php",
             "params": {
-                "message": "MYNETA%20141002"
+                "message": "MYNETA 141002"
             }
         },
         "response": {
@@ -19,7 +19,7 @@ module.exports = function() {
             "method": "GET",
             "url": "http://www.myneta.info/sms.php",
             "params": {
-                "message": "MYNETA%2014100"
+                "message": "MYNETA 14100"
             }
         },
         "response": {
@@ -34,7 +34,7 @@ module.exports = function() {
             "method": "GET",
             "url": "http://www.myneta.info/sms.php",
             "params": {
-                "message": "MYNETA%20149099"
+                "message": "MYNETA 149099"
             }
         },
         "response": {

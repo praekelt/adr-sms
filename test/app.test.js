@@ -12,7 +12,13 @@ describe("app", function() {
         beforeEach(function() {
             app = new go.app.GoApp();
 
-            tester = new AppTester(app);
+            tester = new AppTester(app, {
+                api: {
+                    http: {
+                        default_encoding: 'none'
+                    }
+                }
+            });
 
             tester
                 .setup.config.app({

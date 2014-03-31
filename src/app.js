@@ -41,19 +41,18 @@ go.app = function() {
             return self
                 .http.get('http://www.myneta.info/sms.php',{
                     params: {
-                        message: 'MYNETA%20' + pin
+                        message: 'MYNETA ' + pin
                     }
                 })
                 .then(function(resp) {
                     // even errors return 200 and a string for the user
                     // which is double quoted by sandbox
-                    var trimmed = resp.body.substring(1, resp.body.length-1);
-                    var pin = resp.request.params.message.substring(9);
+                    var pin = resp.request.params.message.substring(7);
                     var metric = 'requests.clean';
-                    if (trimmed == self.response_unmapped(pin)){
+                    if (resp.body == self.response_unmapped(pin)){
                         // unmapped
                         metric = 'requests.unmapped';
-                    } else if (trimmed == self.response_error){
+                    } else if (resp.body == self.response_error){
                         // unrecognised
                         metric = 'requests.error';
                     }
@@ -62,7 +61,7 @@ go.app = function() {
                         .then(function(result) {
                             return self.im.metrics.fire.last(metric,result.value);
                         }).then(function(){
-                            return trimmed;
+                            return resp.body;
                         });
                 });
         };
